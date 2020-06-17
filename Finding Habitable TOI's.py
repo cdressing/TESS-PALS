@@ -25,8 +25,10 @@ Sol_Rad = exofop['Stellar Radius (R_Sun)']
 Log = exofop['Stellar log(g) (cm/s^2)']
 Depth = exofop['Depth (ppm)']
 Temp = exofop['Stellar Eff Temp (K)']
-exofop.loc[(Temp >= 4200) & (Temp <= 6100) & (Sol_Rad <= 2) & (Log >= 4) & (Depth <= 1000) & (P_Rad >= 0.72) & (P_Rad <= 1.7)]
+OP = exofop['Period (days)']
+#Semimajor axis constraint will be applied via an approximation of Kepller's 3rd law (p**2 = a**3)
+#Period: p = (0.95**3)**0.5 = 0.926 years = 338 days, p = (1.68**3)**0.5 = 2.18 years = 795 days
+exofop.loc[(Temp >= 4200) & (Temp <= 6100) & (Sol_Rad <= 2) & (Log >= 4) & (Depth <= 1000) & (P_Rad >= 0.72) & (P_Rad <= 1.7) & (OP >= 338) & (OP <= 795)]
 
 #Hsu et al (2020) parameters
-OP = exofop['Period (days)']
 exofop.loc[(P_Rad >= 0.75) & (P_Rad <= 1.5) & (Sol_Rad >= 0.75) & (OP >= 237) & (OP <= 500)]
